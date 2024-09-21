@@ -59,3 +59,17 @@ resource "aws_instance" "web_instance" {
   # Clave SSH (opcional, si deseas acceder a la instancia)
   key_name = "your-key-name"
 }
+
+# Creación de Instancia EC2 en la Subred Pública
+resource "aws_instance" "web_instance" {
+  ami           = "ami-0c55b159cbfafe1f0"  # Amazon Linux 2 AMI (cambia según tu región)
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.public_subnet.id
+
+  tags = {
+    Name = "web_instance"
+  }
+
+  # Clave SSH (opcional, si deseas acceder a la instancia)
+  key_name = "your-key-name"
+}
