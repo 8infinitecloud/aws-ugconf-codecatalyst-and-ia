@@ -1,0 +1,23 @@
+name: "Terraform Deployment"
+name: "Terraform Deployment"
+schemaVersion: 1
+
+actions:
+  terraform_apply:
+    identifier: "terraform_apply"
+    name: "Apply Terraform"
+    run: |
+      terraform init
+      terraform apply -auto-approve
+    compute:
+      type: "EC2"
+      os: "LINUX"
+      instanceType: "t2.medium"
+    artifacts:
+      paths:
+        - "**/*.tfstate"
+    environment:
+      roleArn: "arn:aws:iam::123456789012:role/CodeCatalystTerraformRole"  # Cambia por tu ARN de role
+    workspaces:
+      - repo: "main"
+        path: "/"
